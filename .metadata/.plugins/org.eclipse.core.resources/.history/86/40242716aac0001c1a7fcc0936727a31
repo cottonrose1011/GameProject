@@ -1,0 +1,189 @@
+
+
+import java.util.Scanner;
+
+public class ex1 {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int n=0,i =0;
+		float sum=0,d,y,e,w,avg=0,result=0;
+		String money,s="";
+		
+		d = Float.parseFloat(args[0]);
+		e = Float.parseFloat(args[1]);
+		y = Float.parseFloat(args[2]);
+		money = args[3];
+		
+		if(ismoney(money)) {
+		while(in.hasNextLine()) {
+			
+			Scanner sc = new Scanner(in.nextLine());
+			
+			while(sc.hasNext()) {
+				
+				n = sc.nextInt();
+				s = sc.next();
+				
+				if(whatmoney(money) == "dollar") {
+					
+					switch (s) {
+					case "dollar":
+						result = (int)n;
+						break;
+					case "euro":
+						result = (float)(n*e)/change(d, e, y, money);
+						break;
+					case "yen":
+						result = (float)(((n*y)/change(d, e, y, money)/100));
+						break;
+					case "won":
+						result = (float)n/change(d, e, y, money);
+						break;
+						
+					default:
+						break;
+					}
+				}
+				else if(whatmoney(money) == "euro") {
+					switch (s) {
+					case "dollar":
+						result = (float)(n*d)/change(d, e, y, money);
+						break;
+					case "euro":
+						result = (int)n;
+						break;
+					case "yen":
+						result = (float)(((n*y)/change(d, e, y, money)/100));
+						break;
+					case "won":
+						result = (float)n/change(d, e, y, money);
+						break;
+						
+					default:
+						break;
+					}
+					
+				}
+				else if(whatmoney(money) == "yen") {
+					switch (s) {
+					case "dollar":
+						result = (float)100*(n*d)/change(d, e, y, money);
+						break;
+					case "euro":
+						result = (float)(n*e)/change(d, e, y, money);
+						break;
+					case "yen":
+						result = (int)n;
+						break;
+					case "won":
+						result = (float)100*n/change(d, e, y, money);
+						break;
+						
+					default:
+						break;
+					}
+				}
+				else if(whatmoney(money) == "won") {
+					switch (s) {
+					case "dollar":
+						result = (float)n*d;
+						break;
+					case "euro":
+						result = (float)n*e;
+						break;
+					case "yen":
+						result = (float)(n*y)/100;
+						break;
+					case "won":
+						result = (int)n;
+						break;
+						
+					default:
+						break;
+					}
+				}
+				
+				
+			}
+			i++;
+			sum += result;
+			System.out.printf("%.1f %s --> %.3f %s\n",(float)n, s, result, money);
+			
+		}//while
+		
+		System.out.println();
+		System.out.printf("합계: %.3f %s\n", sum, money);
+		System.out.printf("평균: %.3f %s", (sum/(float)i), money);
+		
+		}//if
+		else {
+			System.out.println("통화명 오류");
+		}
+		
+		
+		
+		
+	}
+	public static float change(float d, float e, float y, String money) {
+		float chg=0;
+		
+		switch (money) {
+		case "dollar":
+			chg = d;
+			break;
+		case "euro":
+			chg = e;
+			break;
+		case "yen":
+			chg = y;
+			break;
+		case "won":
+			chg = 1;
+			break;
+		default:
+			break;
+		}
+		
+		
+		return chg;
+	}
+	public static boolean ismoney(String money) {
+		switch (money) {
+		
+		case "dollar":
+			return true;
+		case "euro":
+			return true;
+		case "yen":
+			return true;
+		case "won":
+			return true;
+		default:
+			return false;
+			
+		}
+	}
+	public static String whatmoney(String money) {
+		switch (money) {
+		
+		case "dollar":
+			money = "dollar";
+			break;
+		case "euro":
+			money = "euro";
+			break;
+		case "yen":
+			money = "yen";
+			break;
+		case "won":
+			money = "won";
+			break;
+		default:
+			break;
+			
+		}
+		return money;
+	}
+
+}

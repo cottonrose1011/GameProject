@@ -1,0 +1,36 @@
+
+import Tools.Rand;
+
+public class Figures {
+	public static void main(String[] args) {
+		Figure 	f[] = new Figure[Rand.r(5, 10)];
+		Circle	c[] = new Circle[Rand.r(5, 10)], c1[];
+		Rectangle r[] = new Rectangle[Rand.r(5, 10)];
+		
+		for(int i =0; i < f.length; i++)
+			f[i]= new Figure(Rand.r(-20, 20), Rand.r(-20, 20));
+		for(Figure fig:f) System.out.println(fig);
+		
+		
+		for(int i=0;i < c.length;i++)
+			c[i] = new Circle(Rand.r(-20, 20), Rand.r(-20, 20), Rand.r(3, 20));
+		for(int i=0;i < r.length;i++)
+			r[i] = new Rectangle(Rand.r(-20, 20),Rand.r(-20, 20),Rand.r(3, 20), Rand.r(3, 20));
+
+		
+		printFigures(c);
+		printFigures(r);
+		/*
+		c1 = Sort.Sorting(c, Sort.TYPE);
+		printFigures(c1);
+		//printFigures(r);		
+		*/
+	}
+	
+	public static void printFigures(Circle[] c) {
+		Circle.printCircles(c);
+	}
+	public static void printFigures(Rectangle[] c) {
+		Rectangle.printRectangles(c);
+	}
+}

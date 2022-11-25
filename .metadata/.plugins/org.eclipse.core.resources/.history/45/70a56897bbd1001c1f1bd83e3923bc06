@@ -1,0 +1,11 @@
+
+public class Figures {
+
+	public static void main(String[] args) {
+		Circle c1 = new Circle(13), c2; //c1은 객체가 아닌 객체 참조 변수
+		c2 = c1; //c1, c2가 같은 객체 가르킴
+		System.out.println(c1);
+
+	}
+
+}

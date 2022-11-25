@@ -1,0 +1,25 @@
+
+public class Circle {
+	
+	int 	radius;
+	float 	area;
+	static final float PI = 3.1415f;
+	
+	public void setArea() {
+		area = radius*radius*PI;
+	}
+	
+	public String toString() {
+		return String.format("[원] 반지름[%d] 면적[%.2f]", radius, area);
+	}
+	
+	public static void main(String[] args) {
+		Circle c1 = new Circle(), c2; //c1은 객체가 아닌 객체 참조 변수
+		c2 = c1; //c1, c2가 같은 객체 가르킴
+		c2.radius = 10;
+		c2.setArea();
+		System.out.println(c1);
+		
+	}
+
+}

@@ -1,0 +1,30 @@
+package demo;
+
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Demo {
+	JFrame frame;
+	private int WIDTH=1080, HEIGHT = 780;
+	private int count_1p=0, count_2p=0;
+	
+	public Demo() {
+		frame = new JFrame("Demo");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(WIDTH,HEIGHT);
+		frame.setVisible(true);
+	}
+	
+	public void go() {
+		
+	}
+	
+	class ExPanel extends JPanel{
+		public void paintComponent(Graphics g) {
+			
+		}
+	}
+	 
+}

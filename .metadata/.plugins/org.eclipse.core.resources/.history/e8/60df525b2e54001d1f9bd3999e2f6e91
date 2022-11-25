@@ -1,0 +1,40 @@
+import java.util.Arrays;
+
+public class QuickSort {
+	int[] data = {8, 3, 5, 2, 9, 4, 6};
+	int n = 7;
+	
+	public void quickSort(int low, int high) {
+		if (low >= high) {
+			
+		} else {
+			int pivotPoint = partition(low, high);
+			quickSort(low, pivotPoint - 1);
+			quickSort(pivotPoint + 1, high);
+		}
+	}
+	public int partition(int low, int high) {
+		int left=low+1, right=high, temp;
+		while(left <= right) {
+			while(left > data[low]) left++;
+			while(right < data[low]) right--;
+			
+			if(left > right) {
+				temp = data[left];
+				data[left] = data[right];
+				data[right] = temp;
+			}
+			else {
+				temp = data[low];
+				data[low] = data[right];
+				data[right] = temp;
+			}
+		}
+		
+		return right;
+	}
+	public void go() {
+		quickSort(0, n-1);
+		System.out.println(Arrays.toString(data));
+	}
+}

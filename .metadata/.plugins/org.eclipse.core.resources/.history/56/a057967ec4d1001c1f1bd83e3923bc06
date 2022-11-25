@@ -1,0 +1,57 @@
+import java.util.Arrays;
+
+public class Rectangle {
+	
+	private String 	ID;
+	private int 	radius;
+	private float 	area;
+	static final float PI = 3.1415f;
+	
+	public Rectangle(Rectangle o) {
+		ID = o.ID;
+		o.set(o.radius);
+		setArea();
+	}
+	public Rectangle(String no) {
+		ID = no;
+		
+	}
+	public Rectangle(String no,int r) {
+		this(no); //this()는 생성자이기 때문에 맨 첫 줄에 와야함, 파라미터 타입이 맞는 생성자를 호출한다
+		set(r);
+		setArea();
+	}
+	public void setArea() {
+		area = radius*radius*PI;
+	}
+	public void set(int radius) {
+		this.radius= radius;
+	}
+	public String toString() {
+		return String.format("[원-%s] 반지름[%d] 면적[%.2f]",ID, radius, area);
+	}
+	public static float getAvgArea(Rectangle[] cir) {
+		float 	sum = 0;
+		
+		for(Rectangle c: cir) {
+			sum += c.area;
+		}
+		return sum/cir.length;
+	}
+	public static Rectangle[] getLargeCircles(Rectangle[] cir, float avg) {
+		Rectangle tmp[] = new Rectangle[cir.length], res[];
+		int cnt =0;
+		
+		for(int i =0; i < cir.length; i++) {
+			if(cir[i].area > avg) {
+				tmp[cnt++] = cir[i];
+			}
+		}
+		res = Arrays.copyOf(tmp, cnt);
+		return res;
+	}
+	public static void printCircles(Rectangle[] cir) {
+		for(Rectangle c: cir) System.out.println(c);
+		
+	}
+}

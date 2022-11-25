@@ -1,0 +1,30 @@
+public class Oval extends Circle{
+	int		w_radius;
+	String  type;
+
+	public Oval(int x, int y, int r,int w_r) {
+		super(x, y,r);
+		w_radius = w_r;
+		setArea();
+	}
+	public void Set(int w_r) {
+		w_radius = w_r;
+		type = "Circle";
+	}
+	public void setArea() {
+		area = radius*w_radius*PI;
+	}
+	public String toString() {
+		return String.format("[%s][X: %d, Y: %d] 반지름: %d, 긴 반지름: %d, 면적: %.3f",
+				type, x, y, radius,w_radius,area);
+	}
+	public float getArea() {
+		return area;
+	}
+	public static void printCircles(Oval[] c) {
+		System.out.println("- CIRCLE ----------------------------------");
+		for(Oval cc: c) {
+			System.out.println(cc);
+		}
+	}
+}

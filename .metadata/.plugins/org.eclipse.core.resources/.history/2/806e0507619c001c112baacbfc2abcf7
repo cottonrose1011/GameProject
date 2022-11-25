@@ -1,0 +1,15 @@
+import java.util.Scanner;
+
+public class HelloWorld {
+	
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		String name = "정부용";
+		int age;
+		age = in.nextInt();
+		// TODO Auto-generated method stub	
+		int num = 1234;
+		System.out.println("소프트웨어학과,"+name+"이고, 나이는 "+age+"입니다.");
+	}
+
+}

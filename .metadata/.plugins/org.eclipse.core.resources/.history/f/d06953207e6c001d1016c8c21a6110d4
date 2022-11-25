@@ -1,0 +1,18 @@
+package demo;
+
+import javax.swing.JFrame;
+
+public class Demo {
+	JFrame frame;
+	
+	public Demo() {
+		frame = new JFrame("Demo");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1080,780);
+		frame.setVisible(true);
+		
+		
+	}
+	
+	 
+}

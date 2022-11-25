@@ -1,0 +1,13 @@
+
+public class Figures {
+
+	public static void main(String[] args) {
+		Circle c1 = new Circle("C1002", 13), c2; //c1은 객체가 아닌 객체 참조 변수
+		c2 = new Circle(c1);
+		c2.set(15);
+		System.out.println(c1);
+		System.out.println(c2);
+
+	}
+
+}

@@ -1,0 +1,14 @@
+
+public class HelloWorld {
+	
+	public static void main(String[] args) {
+		int intType = 100;
+		double doubleType = 150.5;
+		String stringTypeString = "나";
+		
+		System.out.println(intType);
+		System.out.println(doubleType);
+		System.out.println(stringTypeString);
+		
+} 
+}

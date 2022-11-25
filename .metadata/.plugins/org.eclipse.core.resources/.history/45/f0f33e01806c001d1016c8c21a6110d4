@@ -1,0 +1,37 @@
+package demo;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Demo {
+	JFrame frame;
+	private int WIDTH=1080, HEIGHT = 780;
+	private int count_1p=0, count_2p=0;
+	JPanel introPage = new ExPanel();
+	
+	public Demo() {
+		frame = new JFrame("Demo");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(WIDTH,HEIGHT);
+		frame.getContentPane().add(introPage);
+		frame.getContentPane().remove(introPage);
+		
+		frame.setVisible(true);
+	}
+	
+	public void go() {
+		
+	}
+	
+	class ExPanel extends JPanel{
+		Image introBackground = new ImageIcon(Demo.class.getResource("../images/introImage.jpg")).getImage();
+		public void paintComponent(Graphics g) {
+			g.drawImage(introBackground, 0, 0, null);
+		}
+	}
+	 
+}

@@ -1,0 +1,32 @@
+public class Oval extends Figure{
+	int		radius;
+	float	area;
+	String  type;
+	public final static float PI = 3.1415f;
+
+	public Oval(int x, int y, int r) {
+		super(x, y);
+		Set(r);
+		setArea();
+	}
+	public void Set(int r) {
+		radius = r;
+		type = "Circle";
+	}
+	public void setArea() {
+		area = radius*radius*PI;
+	}
+	public String toString() {
+		return String.format("[%s][X: %d, Y: %d] 반지름: %d, 면적: %.3f",
+				type, x, y, radius,area);
+	}
+	public float getArea() {
+		return area;
+	}
+	public static void printCircles(Oval[] c) {
+		System.out.println("- CIRCLE ----------------------------------");
+		for(Oval cc: c) {
+			System.out.println(cc);
+		}
+	}
+}

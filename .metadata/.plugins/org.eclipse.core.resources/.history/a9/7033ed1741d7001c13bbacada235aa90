@@ -1,0 +1,34 @@
+public class Circle {
+	int		x, y, radius;
+	float	area;
+	String  type;
+	public final static float PI = 3.1415f;
+	
+	public Circle() {}
+
+	public Circle(int x, int y, int r) {
+		Set(x,y,r);
+		setArea();
+	}
+	public void Set(int xx, int yy, int r) {
+		x = xx; y = yy;
+		radius = r;
+		type = "Circle";
+	}
+	public void setArea() {
+		area = radius*radius*PI;
+	}
+	public String toString() {
+		return String.format("[%s][X: %d, Y: %d] 반지름: %d, 면적: %.3f",
+				type, x, y, radius,area);
+	}
+	public float getArea() {
+		return area;
+	}
+	public static void printCircles(Circle[] c) {
+		System.out.println("- CIRCLE ----------------------------------");
+		for(Circle cc: c) {
+			System.out.println(cc);
+		}
+	}
+}

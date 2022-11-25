@@ -1,0 +1,32 @@
+
+public class Circle {
+	
+	private String 	ID;
+	private int 	radius;
+	private float 	area;
+	static final float PI = 3.1415f;
+	
+	public Circle(Circle o) {
+		ID = o.ID;
+		o.set(o.radius);
+		o.setArea();
+	}
+	public Circle(String no) {
+		ID = no;
+		
+	}
+	public Circle(String no,int r) {
+		this(no); //this()는 생성자이기 때문에 맨 첫 줄에 와야함, 파라미터 타입이 맞는 생성자를 호출한다
+		set(r);
+		setArea();
+	}
+	public void setArea() {
+		area = radius*radius*PI;
+	}
+	public void set(int radius) {
+		this.radius= radius;
+	}
+	public String toString() {
+		return String.format("[원] 반지름[%d] 면적[%.2f]", radius, area);
+	}
+}

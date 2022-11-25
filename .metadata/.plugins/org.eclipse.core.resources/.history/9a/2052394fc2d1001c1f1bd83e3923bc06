@@ -1,0 +1,20 @@
+
+public class Figures {
+
+	public static void main(String[] args) {
+		float 	avg;
+		Circle c1 = new Circle("C1002", 13), c2; //c1은 객체가 아닌 객체 참조 변수
+		Circle cir[] = new Circle[Rand.r(5, 10)];		
+		
+		for(int i =0; i < cir.length; i++) {
+			cir[i] = new Circle("C"+Rand.r(10000, 10000000), Rand.r(10, 20));
+		}
+		
+		for(Circle c: cir) System.out.println(c);
+		System.out.println();
+		System.out.println("원 넓이의 평균 : "+(avg = Circle.getAvgArea(cir)));
+		
+		
+	}
+
+}

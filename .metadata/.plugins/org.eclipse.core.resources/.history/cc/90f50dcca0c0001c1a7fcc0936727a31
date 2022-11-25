@@ -1,0 +1,40 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class ex3 {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		Scanner in = new Scanner(new File(args[0]));
+		int SIZE = 1000, idx = 0;
+		int[] t_kor = new int[SIZE],t_eng = new int[SIZE], t_math = new int[SIZE];
+		String t_name[] = new String[SIZE], t_num[] = new String[SIZE];
+		int[] kor, eng, math;
+		String name[], num[];
+		float avg[];
+		
+		while(in.hasNext()) {
+			
+			t_num[idx] = in.next();
+			t_name[idx] = in.next();
+			t_kor[idx] = in.nextInt();
+			t_eng[idx] = in.nextInt();
+			t_math[idx] = in.nextInt();
+			idx ++;
+		}
+		
+		num = Arrays.copyOf(t_num, idx);
+		name = Arrays.copyOf(t_name, idx);
+		kor = Arrays.copyOf(t_kor, idx);
+		eng = Arrays.copyOf(t_eng, idx);
+		math = Arrays.copyOf(t_math, idx);
+		
+		
+		
+		for(int i = 0 ; i < idx; i++) {
+			System.out.printf("%s %s %2d %2d %2d %.2f",num[i], name[i], kor[i], eng[i], math[i], (kor[i]+eng[i]+math[i])/3.0f);
+		}
+	}
+
+}

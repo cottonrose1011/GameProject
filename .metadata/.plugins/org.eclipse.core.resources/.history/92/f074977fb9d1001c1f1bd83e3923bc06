@@ -1,0 +1,17 @@
+
+public class Circle {
+	
+	private int 	radius;
+	private float 	area;
+	static final float PI = 3.1415f;
+	
+	public void setArea() {
+		area = radius*radius*PI;
+	}
+	public void set(int r) {
+		r = radius;
+	}
+	public String toString() {
+		return String.format("[원] 반지름[%d] 면적[%.2f]", radius, area);
+	}
+}

@@ -1,0 +1,35 @@
+
+public class Rectangle extends Figure{
+	int		width, height;
+	int		area;
+	String 	type;
+	
+	
+	public Rectangle(int xx,int yy ,int w) {
+		super(xx, yy);
+		width = w;
+		type = "Rectangle";
+	}
+	public Rectangle(int x, int y, int w, int h) {
+		this(x,y,w);
+		height = h;
+		setArea();
+	}
+	public void Set(int width, int height) {
+		this.width = width;
+		this.height = height;
+	}
+	public void setArea() {
+		area = width*height;
+	}
+	public String toString() {
+		return String.format("[%s][X: %d, Y: %d] 가로: %d 세로: %d 면적: %dd", 
+				type, x, y, width, height, area);
+	}
+	public static void printRectangles(Rectangle[] r) {
+		System.out.println("- RECTANGLE -------------------------");
+		for(Rectangle rr: r) {
+			System.out.println(rr);
+		}
+	}
+}

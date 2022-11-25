@@ -1,0 +1,58 @@
+import java.util.Arrays;
+
+public class Rectangle {
+	
+	private String 	ID;
+	private int 	width, height;
+	private float 	area;
+	
+	
+	public Rectangle(Rectangle o) {
+		ID = o.ID;
+		o.set(o.width, o.height);
+		setArea();
+	}
+	public Rectangle(String no) {
+		ID = no;
+		
+	}
+	public Rectangle(String no,int w, int h) {
+		this(no); //this()는 생성자이기 때문에 맨 첫 줄에 와야함, 파라미터 타입이 맞는 생성자를 호출한다
+		set(w,h);
+		setArea();
+	}
+	public void setArea() {
+		area = width*height;
+	}
+	public void set(int w, int h) {
+		width = w; height = h;
+	}
+	public String toString() {
+		return String.format("[사각형-%s] 가로[%d] 세로[%d] 면적[%.2f]",ID, width,height, area);
+	}
+	public static float getAvgArea(Rectangle[] cir) {
+		float 	sum = 0;
+		
+		for(Rectangle c: cir) {
+			sum += c.area;
+		}
+		return sum/cir.length;
+	}
+	public static Rectangle[] getLargeRactangles(Rectangle[] cir, float avg) {
+		
+		Rectangle tmp[] = new Rectangle[cir.length], res[];
+		int cnt =0;
+		
+		for(int i =0; i < cir.length; i++) {
+			if(cir[i].area > avg) {
+				tmp[cnt++] = cir[i];
+			}
+		}
+		res = Arrays.copyOf(tmp, cnt);
+		return res;
+	}
+	public static void printRectangles(Rectangle[] cir) {
+		for(Rectangle c: cir) System.out.println(c);
+		
+	}
+}

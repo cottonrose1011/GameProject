@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\lg\OneDrive\πŸ≈¡ »≠∏È\GameProject\.metadata\.plugins\org.eclipse.jdt.core
+4044757637.index
+1865797976.index
+1828026965.index
