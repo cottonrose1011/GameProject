@@ -20,12 +20,11 @@ public class Demo {
 	
 	JFrame frame;
 	JPanel Page = new GamePanel();
-	//ImageIcon btImage = new ImageIcon("../images/buttonImage.png");
 	JButton button = new JButton("게임시작");
 	JLabel txt1 = new JLabel(String.valueOf(count_1p));
 	JLabel txt2 = new JLabel(String.valueOf(count_2p));
 	JLabel timerText = new JLabel(String.valueOf(timer));
-	
+	JLabel winner;
 	GameTimer gameTimer = new GameTimer();
 	Image background;
 
@@ -51,26 +50,59 @@ public class Demo {
 		timerText.setHorizontalAlignment(JLabel.CENTER);
 		
 		timerText.setFont(new Font("Serif", Font.ITALIC, 50));
-		txt1.setBounds(300, 500, 90, 90);//1p의 count
-		txt2.setBounds(800, 500, 90, 90);//2p의 count
+		txt1.setBounds(300, 350, 120, 120);//1p의 count
+		txt2.setBounds(800, 350, 120, 120);//2p의 count
 		timerText.setBounds(520, 100, 70, 70);//timer의 count
 		frame.setVisible(true);
 	}
 	public void go() {
 		while(true) {
-			if(count_1p == count_2p) {
-				txt1.setFont(new Font("Gothic", Font.PLAIN, 50));
-				txt2.setFont(new Font("Gothic", Font.PLAIN, 50));
-			}
-			if(count_1p > count_2p) {
-				txt1.setFont(new Font("Gothic", Font.PLAIN, 80));
-				txt2.setFont(new Font("Gothic", Font.PLAIN, 40));
-			}
-			if(count_1p < count_2p) {
-				txt2.setFont(new Font("Gothic", Font.PLAIN, 80));
-				txt1.setFont(new Font("Gothic", Font.PLAIN, 40));
-			}
+			txt1.setFont(new Font("Gothic", Font.PLAIN, 50));
+			txt2.setFont(new Font("Gothic", Font.PLAIN, 50));
 			if(start == 1) gameTimer.run(); // 게임 시작하면 timer 가동
+			if(timer == 0) {
+				if(count_1p == count_2p) {
+					winner = new JLabel("Draw");
+					winner.setHorizontalAlignment(JLabel.CENTER);
+					winner.setFont(new Font("Gothic", Font.PLAIN, 70));
+					timerText.setVisible(false);
+					winner.setBounds(420,50,300,500);
+					Page.add(winner);
+				}
+				else if(count_1p > count_2p) {
+					winner = new JLabel("1p Win!!");
+					winner.setHorizontalAlignment(JLabel.CENTER);
+					winner.setFont(new Font("Gothic", Font.PLAIN, 70));
+					timerText.setVisible(false);
+					winner.setBounds(420,50,300,500);
+					Page.add(winner);
+				}
+				else {
+					winner = new JLabel("2p Win!!");
+					winner.setHorizontalAlignment(JLabel.CENTER);
+					winner.setFont(new Font("Gothic", Font.PLAIN, 70));
+					timerText.setVisible(false);
+					winner.setBounds(420,50,300,500);
+					Page.add(winner);
+				}
+				break;
+			}
+		}
+	}
+	
+	public void compare() {
+		
+		if(count_1p == count_2p) {
+			txt1.setFont(new Font("Gothic", Font.PLAIN, 50));
+			txt2.setFont(new Font("Gothic", Font.PLAIN, 50));
+		}
+		if(count_1p > count_2p) {
+			txt1.setFont(new Font("Gothic", Font.PLAIN, 85));
+			txt2.setFont(new Font("Gothic", Font.PLAIN, 40));
+		}
+		if(count_1p < count_2p) {
+			txt2.setFont(new Font("Gothic", Font.PLAIN, 85));
+			txt1.setFont(new Font("Gothic", Font.PLAIN, 40));
 		}
 	}
 	
@@ -89,14 +121,16 @@ public class Demo {
 			
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_SPACE:
-				count_1p++;
+				if(timer > 0) count_1p++;
 				txt1.setText(String.valueOf(count_1p));
+				compare();
 				frame.repaint();
 				break;
 				
 			case KeyEvent.VK_ENTER:
-				count_2p++;
+				if(timer > 0) count_2p++;
 				txt2.setText(String.valueOf(count_2p));
+				compare();
 				frame.repaint();
 				break;
 				
@@ -113,11 +147,10 @@ public class Demo {
 	class GameTimer extends Thread { //timer thread
 		@Override
 		public void run() {
-			for(int i=15; i>=1; i--) {
+			
+			while(timer > 0) {
 				timer--;
 				timerText.setText(String.valueOf(timer));
-				frame.repaint();
-			
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
@@ -130,12 +163,12 @@ public class Demo {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				start = 1;
 				button.setVisible(false);
 				background = new ImageIcon(Demo.class.getResource("../images/mainImage.png")).getImage();
 				Page.add(txt1);
 				Page.add(txt2);
 				Page.add(timerText);
+				start = 1;
 			}
 
 		});
