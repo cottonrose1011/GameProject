@@ -1,8 +1,0 @@
-package images;
-
-public class Snippet {
-	public static void main(String[] args) {
-		introImage
-	}
-}
-

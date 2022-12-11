@@ -1,6 +1,6 @@
 package demo;
 
-import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -16,16 +16,20 @@ import javax.swing.JPanel;
 
 public class Demo {
 	private int WIDTH=1080, HEIGHT = 780;
-	private int count_1p=0, count_2p=0;
+	private int count_1p=0, count_2p=0, start = 0, timer = 16;
 	
 	JFrame frame;
-	JPanel introPage = new ExPanel();
-	JPanel mainPage = new MainPanel();
+	JPanel Page = new GamePanel();
 	//ImageIcon btImage = new ImageIcon("../images/buttonImage.png");
-	JButton button = new JButton("시작하기");
+	JButton button = new JButton("게임시작");
 	JLabel txt1 = new JLabel(String.valueOf(count_1p));
 	JLabel txt2 = new JLabel(String.valueOf(count_2p));
+	JLabel timerText = new JLabel(String.valueOf(timer));
 	
+	GameTimer gameTimer = new GameTimer();
+	Image background;
+
+
 	public Demo() {
 		//frame
 		frame = new JFrame("Demo");
@@ -33,86 +37,107 @@ public class Demo {
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setLocationRelativeTo(null);
 		//panel
-		frame.getContentPane().add(introPage);//인트로 화면 보여주기
-		introPage.setLayout(null);
-		button.setBounds(100,100,300,90);
-		introPage.add(button);
-		frame.addKeyListener(new GameListener());
+		background =new ImageIcon(Demo.class.getResource("../images/introImage.jpg")).getImage();
+		frame.getContentPane().add(Page);//인트로 화면 보여주기
+		Page.setLayout(null);
+		button.setBounds(650,500,300,90);
+		Page.add(button);
 		toMain();
+		frame.addKeyListener(new GameListener());
+		frame.setFocusable(true);
 		//label
 		txt1.setHorizontalAlignment(JLabel.CENTER);
 		txt2.setHorizontalAlignment(JLabel.CENTER);
-		mainPage.add(txt1);
-		mainPage.add(txt2);
-		txt1.setBounds(300, 500, 30, 30);
-		txt2.setBounds(800, 500, 30, 30);
+		timerText.setHorizontalAlignment(JLabel.CENTER);
 		
-		
-		//mainPage.setVisible(false);
+		timerText.setFont(new Font("Serif", Font.ITALIC, 50));
+		txt1.setBounds(300, 500, 90, 90);//1p의 count
+		txt2.setBounds(800, 500, 90, 90);//2p의 count
+		timerText.setBounds(520, 100, 70, 70);//timer의 count
 		frame.setVisible(true);
 	}
-	/*
-	 키보드 이벤트처리 + 이펙트 효과 + 시작화면 수정?
-	 */
 	public void go() {
-		txt1.setText(String.valueOf(count_1p));
-		txt2.setText(String.valueOf(count_2p));
-		frame.repaint();
-	}
-	
-	class ExPanel extends JPanel{
-		Image introBackground = new ImageIcon(Demo.class.getResource("../images/introImage.jpg")).getImage();
-		public void paintComponent(Graphics g) {
-			g.drawImage(introBackground, 0, 0, null);
+		while(true) {
+			if(count_1p == count_2p) {
+				txt1.setFont(new Font("Gothic", Font.PLAIN, 50));
+				txt2.setFont(new Font("Gothic", Font.PLAIN, 50));
+			}
+			if(count_1p > count_2p) {
+				txt1.setFont(new Font("Gothic", Font.PLAIN, 80));
+				txt2.setFont(new Font("Gothic", Font.PLAIN, 40));
+			}
+			if(count_1p < count_2p) {
+				txt2.setFont(new Font("Gothic", Font.PLAIN, 80));
+				txt1.setFont(new Font("Gothic", Font.PLAIN, 40));
+			}
+			if(start == 1) gameTimer.run(); // 게임 시작하면 timer 가동
 		}
 	}
-	class MainPanel extends JPanel{ //게임을 시작할 화면
-		Image mainBackground = new ImageIcon(Demo.class.getResource("../images/mainImage.png")).getImage();
+	
+	class GamePanel extends JPanel{
+		private static final long serialVersionUID = 1L;
+
 		public void paintComponent(Graphics g) {
-			g.drawImage(mainBackground, 0, 0, null);
+			g.drawImage(background, 0, 0, null);
+			this.repaint();
 		}
 	}
 	class GameListener implements KeyListener{
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
+		
 		@Override
 		public void keyPressed(KeyEvent e) {
 			
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_SPACE:
 				count_1p++;
+				txt1.setText(String.valueOf(count_1p));
+				frame.repaint();
 				break;
 				
 			case KeyEvent.VK_ENTER:
 				count_2p++;
+				txt2.setText(String.valueOf(count_2p));
+				frame.repaint();
 				break;
 				
 			default:
 				break;
 			}
 		}
-
 		@Override
-		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		
+		public void keyTyped(KeyEvent e) {}
+		@Override
+		public void keyReleased(KeyEvent e) {}
 	}
 	
+	class GameTimer extends Thread { //timer thread
+		@Override
+		public void run() {
+			for(int i=15; i>=1; i--) {
+				timer--;
+				timerText.setText(String.valueOf(timer));
+				frame.repaint();
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			}
+	}
+	}
 	public void toMain() {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				introPage.setVisible(false);
-				frame.getContentPane().add(mainPage);
-				mainPage.setLayout(null);
+				start = 1;
+				button.setVisible(false);
+				background = new ImageIcon(Demo.class.getResource("../images/mainImage.png")).getImage();
+				Page.add(txt1);
+				Page.add(txt2);
+				Page.add(timerText);
 			}
+
 		});
 	}
 	

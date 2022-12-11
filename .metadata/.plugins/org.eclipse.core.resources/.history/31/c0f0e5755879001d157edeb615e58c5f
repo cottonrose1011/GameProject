@@ -1,0 +1,24 @@
+package demo;
+
+import javax.swing.JLabel;
+
+public class GameTimer extends Thread{
+	JLabel label1;
+	
+	public GameTimer() {
+		label1 = new JLabel("15");
+	}
+	
+	@Override
+	public void run() {
+		for(int i=15; i>=1; i--) {
+			System.out.println(i);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
