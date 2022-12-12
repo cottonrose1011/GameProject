@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Demo {
-	private int WIDTH=1080, HEIGHT = 780;
+	private static final int WIDTH=1080, HEIGHT = 780;
 	private int count_1p=0, count_2p=0, start = 0, timer = 16;
 	
 	JFrame frame;
@@ -31,7 +31,7 @@ public class Demo {
 
 	public Demo() {
 		//frame
-		frame = new JFrame("Demo");
+		frame = new JFrame("Keyboard Battle");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH,HEIGHT);
 		frame.setLocationRelativeTo(null);
@@ -39,7 +39,7 @@ public class Demo {
 		background =new ImageIcon(Demo.class.getResource("../images/introImage.jpg")).getImage();
 		frame.getContentPane().add(Page);//인트로 화면 보여주기
 		Page.setLayout(null);
-		button.setBounds(650,500,300,90);
+		button.setBounds(380,300,300,90);
 		Page.add(button);
 		toMain();
 		frame.addKeyListener(new GameListener());
@@ -66,7 +66,7 @@ public class Demo {
 					winner.setHorizontalAlignment(JLabel.CENTER);
 					winner.setFont(new Font("Gothic", Font.PLAIN, 70));
 					timerText.setVisible(false);
-					winner.setBounds(420,50,300,500);
+					winner.setBounds(420,0,300,500);
 					Page.add(winner);
 				}
 				else if(count_1p > count_2p) {
@@ -74,7 +74,7 @@ public class Demo {
 					winner.setHorizontalAlignment(JLabel.CENTER);
 					winner.setFont(new Font("Gothic", Font.PLAIN, 70));
 					timerText.setVisible(false);
-					winner.setBounds(420,50,300,500);
+					winner.setBounds(420,0,300,500);
 					Page.add(winner);
 				}
 				else {
@@ -82,7 +82,7 @@ public class Demo {
 					winner.setHorizontalAlignment(JLabel.CENTER);
 					winner.setFont(new Font("Gothic", Font.PLAIN, 70));
 					timerText.setVisible(false);
-					winner.setBounds(420,50,300,500);
+					winner.setBounds(420,0,300,500);
 					Page.add(winner);
 				}
 				break;

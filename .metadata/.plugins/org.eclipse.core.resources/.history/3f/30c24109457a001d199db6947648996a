@@ -1,0 +1,13 @@
+package demo;
+
+public class DemoDriver {
+
+	public static void main(String[] args) {
+		Demo demo = new Demo();
+		
+		for(int i=0; i<=Integer.MAX_VALUE; i++) {
+			demo.go();
+		}
+	}
+
+}
